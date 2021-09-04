@@ -40,7 +40,35 @@ class TestCredentials(unittest.TestCase):
         
     def test_find_account_by_name(self):
         """Test if we can find credentials"""
+        self.new_credentials.save_credentials()
+        new_test_credential = Credentials("Instagram", "Fidel12345")
+        new_test_credential.save_credentials()
         
-    
+        credential_found = Credentials.find_account_by_name("Instagram")
+        
+        self.assertEqual(credential_found.account_name, new_test_credential.account_name)
+        
+        
+    def test_credentials_exists(self):
+        """
+        test it we can return a boolean if the credentials already exist
+        """
+        self.new_credentials.save_credentials()
+        test_credential =Credentials("Spotify", "123456789")
+        test_credential.save_credentials()
+        
+        credential_exist = Credentials.credentials_exist("Spotify")
+        
+        self.assertTrue(credential_exist)
+        
+    def test_display_credentials(self):
+        """test that we return all the contacts saved"""
+        
+        self.assertEqual(Credentials.display_credentials(), Credentials.credentials_list)
+        
+        
+        
+        
+        
 if __name__ == '__main__':
     unittest.main()
