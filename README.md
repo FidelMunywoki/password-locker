@@ -23,10 +23,11 @@ As user I would like to:
    *Delete stored account login
 
 ## Screen Shot
+### login
 ![Image of Yaktocat](assets/password_locker_login.png)
-
-Main Menu
+### main menu
 ![Image of Yaktocat](assets/main_menu.png)
+
 
 ## Installation / Setup instruction
 
@@ -50,16 +51,16 @@ Main Menu
 
 | Behaviour      | Input        | Output       |
 | :------------- | :----------: | -----------: |
-|  Select pizza flavor  |   Peperoni pizza |   Peperoni   |
-| Select piza size  | large, medium, small |  large  |
-| Select Crust   |  Either cripsy,stuffed or glutten-free  |     |
-| select toppings  |  check all the topppings you want     |     |
-| Press Proceed button |     | Table with your selections and the total price for that selection.|
-| Press add pizza button | pizza flavor,size, crust and toppings   | new selection added to the table|
-| Press Checkout |     | Your bill is ...  |
-| press place order| | We have recieved your order and Kindly collect it in 8 hours.|
-| Press home delivery | Your name, phone number and delivery location     |  |
-| press place order| | We have recieved your order and it will be delivered to you with your name, place of delivery, email and amount to be paid.|
+|  Open The applicaton  |   ./run.py |   Welcome to Password Locker App   |
+| select Option  | select cu |  Congratulations username your account has been created  |
+| login   |  username, password  |     |
+| select toppings  |  check all the topppings you want     | welcome to your account    |
+| select an option | 1,2,3,4,5     | |
+| select 1 | 1   | credentials list|
+| select 2 | 2    | Add new Credentials >> Credentials has been generated successfully |
+| select 3|  3 |   Remove credentials >> Credebtial has deleted sucessfully |
+| select 4 | 4     | Search Credentals >> Found Credential |
+| select 5|  5| Log Out|
 
 ## Technologies Used
 
