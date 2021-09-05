@@ -1,6 +1,7 @@
 from user_credentials import Credentials
 from pass_locker_user import User
 import random
+import string
 
 def create_new_credential(account_name, account_password):
     """Create a new user"""
@@ -28,8 +29,12 @@ def delete_credential(credentials):
     """Method that deletes credential"""
     return Credentials.delete_credential(credentials)
 
+def generate_random_password(length):
+  return ''.join(random.choice(string.printable) for i in range(length))
+
 def account_options():
     while True:
+        print("<<<---- MAIN MENU ---->>>")
         print("1: View Your Saved credentials")
         print("2: Add new credentials")
         print("3: Remove credentials")
@@ -61,6 +66,78 @@ def account_options():
                     continue
                 
         elif selected_option == '2':
+            while True:
+                print("Add New Credentials")
+                print("Enter Account Name")
+                account_name = input()
+                print("Enter a password")
+                
+                print(" << Press 'gp' to generate a password instead !! press 'n' to continue")
+                pressed_key = input().lower()
+                if pressed_key == 'gp':
+                    password_length = input("Enter the length of password to generate ")
+                    account_password = generate_random_password(int(password_length))
+                    print(f"Account Name: {account_name}")
+                    print(f"Account Password: {account_password}")
+                    print('\n')
+                    
+                elif pressed_key == 'n':
+                    print('\n')
+                    print("Create Your Password")
+                    account_password = input()
+                    print(f"Account Name: {account_name}")
+                    print(f"Account Password: {account_password}")
+                    
+                save_new_credential(create_new_credential(account_name, account_password))
+                    
+                break
+            
+        elif selected_option ==  '3':
+            while True:
+                print("Search for Credential to delete")
+                print("Enter account name to delete:")
+                
+                search_name = input()
+                
+                if check_existing_credentials(search_name):
+                    found_credential = find_credential(search_name)
+                    print("Found Credential \n")
+                    print(f"Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
+                    print("Delete? y/n")
+                    
+                    sure = input().lower()
+                    if sure == 'y':
+                        delete_credential(found_credential)
+                        print("Account Credentials deleted Successfully ...")
+                        break
+                    elif sure == 'n':
+                        continue
+                    
+                else:
+                    print("That contact does not exist")
+                    break
+                
+        elif selected_option == '4':
+            while True:
+                print("Enter an account name to find credentials for: ")
+                search_name = input()
+                
+                if check_existing_credentials(search_name):
+                    found_credential = find_credential(search_name)
+                    print("Found Credential \n")
+                    print(f"Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
+                    print('\n')
+                
+                    
+                else:
+                    print("That contact does not exist")
+                    
+                break
+         
+             
+           
+                              
+                
             
 
 
@@ -118,6 +195,40 @@ def main():
                     print("Select an option below to continue: 1, 2, 3, 4, or 5")
                     
                 account_options()
+                
+        elif short_code == 'lg':
+            print("Welcome to Password Locker")
+            print("Enter Username:")
+            default_user_name = input()
+            
+            print("Enter Password:")
+            default_user_password = input()
+            print('\n')
+            
+            while default_user_name != 'testuser' or default_user_password != '12345':
+                print("Invalid userame or password | Username 'testuser', Password '12345' ")
+                print("Enter Username:")
+                default_user_name = input()
+                
+                print("Enter Password:")
+                default_user_password = input()
+                print('\n')
+                
+            if default_user_name == 'testuser' and default_user_password == '12345':
+                print("You have successfully logged in!!...\n")
+                
+                print(f"Welcome {default_user_name} to your Account\n")
+                print("Select an option below to continue: 1, 2, 3, 4, or 5")
+                
+            account_options()
+            
+        elif short_code == 'ex':
+            break
+        
+        else:
+            print("Please enter a valid code to continue")
+                
+                
             
         
   
