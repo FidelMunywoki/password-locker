@@ -53,7 +53,7 @@ As user I would like to:
 | :------------- | :----------: | -----------: |
 |  Open The applicaton  |   ./run.py |   Welcome to Password Locker App   |
 | select Option  | select cu |  Congratulations username your account has been created  |
-| login   |  username, password  |     |
+| login   |  username, password  |  You have successfully Login    |
 | select toppings  |  check all the topppings you want     | welcome to your account    |
 | select an option | 1,2,3,4,5     | |
 | select 1 | 1   | credentials list|
@@ -61,6 +61,9 @@ As user I would like to:
 | select 3|  3 |   Remove credentials >> Credebtial has deleted sucessfully |
 | select 4 | 4     | Search Credentals >> Found Credential |
 | select 5|  5| Log Out|
+| select an Option lg|  testuser, 12345| You have successfully login |
+| select an Option ex|  ex| exist Password Locker App|
+
 
 ## Technologies Used
 
