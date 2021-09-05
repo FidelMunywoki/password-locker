@@ -1,3 +1,5 @@
+import pyperclip
+
 class Credentials:
     """credentials class"""
     
@@ -50,4 +52,9 @@ class Credentials:
         method that returns credentials list
         """
         return cls.credentials_list
+    
+    # @classmethod
+    # def copy_credentials(cls, account_name):
+    #     credential_found = Credentials.find_account_by_name(account_name)
+    #    pd.DataFrame(credential_found).t
     
