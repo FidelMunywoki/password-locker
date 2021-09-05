@@ -20,7 +20,7 @@ As user I would like to:
    * Create an account or login the application
    * Store my credentials for different accounts
    * Generate new password for accounts not registered
-   *Delete stored account login
+   * Delete stored account login
 
 ## Screen Shot
 ### login

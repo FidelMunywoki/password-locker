@@ -32,6 +32,9 @@ def delete_credential(credentials):
 def generate_random_password(length):
   return ''.join(random.choice(string.printable) for i in range(length))
 
+def copy_credential(account_name):
+    return Credentials.copy_credentials(account_name)
+
 def account_options():
     while True:
         print("<<<---- MAIN MENU ---->>>")
@@ -39,7 +42,8 @@ def account_options():
         print("2: Add new credentials")
         print("3: Remove credentials")
         print("4: Search credentials")
-        print("5: Log Out")
+        print("5: Copy Credentials")
+        print("6: Log Out")
         
         selected_option = input()
         
@@ -133,7 +137,24 @@ def account_options():
                     print("That contact does not exist")
                     
                 break
-         
+        elif selected_option == '5':
+            print("Enter the account name to copy credentials for ")
+            search_name = input()
+            
+            if check_existing_credentials(search_name):
+                    found_credential = find_credential(search_name)
+                    print("Account name and password successfully copied to clipboard >> \n")
+                    Credentials.copy_credentials(found_credential.account_name)
+            
+        elif selected_option == '6':
+            print("WARNING!! You will loose all your saved credentials for now \n We are working on implementing a database soon")
+            print("Are sure you want to continue? y/n")
+            logout = input().lower()
+            if logout == 'y':
+                print("You have successfully logged out")
+                break
+            elif logout == 'n':
+                continue
              
            
                               
@@ -224,6 +245,8 @@ def main():
             
         elif short_code == 'ex':
             break
+        
+            
         
         else:
             print("Please enter a valid code to continue")
