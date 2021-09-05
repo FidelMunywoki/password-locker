@@ -1,11 +1,13 @@
+#!/usr/bin/env python3.9
+
 from user_credentials import Credentials
 from pass_locker_user import User
 import random
 import string
 
-def create_new_credential(account_name, account_password):
+def create_new_credential(application_name,account_name, account_password):
     """Create a new user"""
-    new_credential = Credentials(account_name, account_password)
+    new_credential = Credentials(application_name,account_name, account_password)
     return new_credential
 
 
@@ -13,13 +15,13 @@ def save_new_credential(credentials):
     "save newly created credentials"
     credentials.save_credentials()
     
-def find_credential(account_name):
+def find_credential(application_name):
     """find credentials based the name account"""
-    return Credentials.find_account_by_name(account_name)
+    return Credentials.find_account_by_name(application_name)
 
-def check_existing_credentials(account_name):
+def check_existing_credentials(application_name):
     """check of given account already exists"""
-    return Credentials.find_account_by_name(account_name)
+    return Credentials.find_account_by_name(application_name)
 
 def display_credentials():
     "Display all the saved credentials"
@@ -32,8 +34,8 @@ def delete_credential(credentials):
 def generate_random_password(length):
   return ''.join(random.choice(string.printable) for i in range(length))
 
-def copy_credential(account_name):
-    return Credentials.copy_credentials(account_name)
+def copy_credential(application_name):
+    return Credentials.copy_credentials(application_name)
 
 def account_options():
     while True:
@@ -72,6 +74,8 @@ def account_options():
         elif selected_option == '2':
             while True:
                 print("Add New Credentials")
+                print("Enter application name: ")
+                application_name = input()
                 print("Enter Account Name")
                 account_name = input()
                 print("Enter a password")
@@ -81,6 +85,7 @@ def account_options():
                 if pressed_key == 'gp':
                     password_length = input("Enter the length of password to generate ")
                     account_password = generate_random_password(int(password_length))
+                    print(f"Application Name: {application_name}")
                     print(f"Account Name: {account_name}")
                     print(f"Account Password: {account_password}")
                     print('\n')
@@ -89,24 +94,25 @@ def account_options():
                     print('\n')
                     print("Create Your Password")
                     account_password = input()
+                    print(f"Application Name: {application_name}")
                     print(f"Account Name: {account_name}")
                     print(f"Account Password: {account_password}")
                     
-                save_new_credential(create_new_credential(account_name, account_password))
+                save_new_credential(create_new_credential(application_name,account_name, account_password))
                     
                 break
             
         elif selected_option ==  '3':
             while True:
                 print("Search for Credential to delete")
-                print("Enter account name to delete:")
+                print("Enter application name to delete:")
                 
                 search_name = input()
                 
                 if check_existing_credentials(search_name):
                     found_credential = find_credential(search_name)
                     print("Found Credential \n")
-                    print(f"Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
+                    print(f"Application Name: {found_credential.application_name} \n Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
                     print("Delete? y/n")
                     
                     sure = input().lower()
@@ -123,13 +129,13 @@ def account_options():
                 
         elif selected_option == '4':
             while True:
-                print("Enter an account name to find credentials for: ")
+                print("Enter an application name to find credentials for: ")
                 search_name = input()
                 
                 if check_existing_credentials(search_name):
                     found_credential = find_credential(search_name)
                     print("Found Credential \n")
-                    print(f"Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
+                    print(f"Application Name: {found_credential.application_name} \n Account Name: {found_credential.account_name} \n Password: {found_credential.account_password}")
                     print('\n')
                 
                     
@@ -144,7 +150,7 @@ def account_options():
             if check_existing_credentials(search_name):
                     found_credential = find_credential(search_name)
                     print("Account name and password successfully copied to clipboard >> \n")
-                    Credentials.copy_credentials(found_credential.account_name)
+                    Credentials.copy_credentials(found_credential.application_name)
             
         elif selected_option == '6':
             print("WARNING!! You will loose all your saved credentials for now \n We are working on implementing a database soon")
@@ -180,6 +186,8 @@ def main():
         
         if short_code == 'cu':
             print("<<=== Create a User ====>>")
+            
+           
             print("Create a Username")
             created_user_name = input()
             

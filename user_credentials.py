@@ -3,9 +3,10 @@ import pyperclip
 class Credentials:
     """credentials class"""
     
-    def __init__(self, account_name, account_password):
+    def __init__(self, application_name, account_name, account_password):
         self.account_name = account_name
         self.account_password =account_password
+        self.application_name =application_name
         
     """list to store credentials"""
     credentials_list = []
@@ -19,7 +20,7 @@ class Credentials:
         Credentials.credentials_list.remove(self)
         
     @classmethod
-    def find_account_by_name(cls, account_name):
+    def find_account_by_name(cls, application_name):
         """"Method that takes account name and returns the name and password
         Args:
             account_name
@@ -28,11 +29,11 @@ class Credentials:
         """
         
         for credential in cls.credentials_list:
-            if credential.account_name == account_name:
+            if credential.application_name == application_name:
                 return credential
             
     @classmethod
-    def credentials_exist(cls, account_name):
+    def credentials_exist(cls, application_name):
         """
         Method that checks if a credential already exists
         
@@ -42,7 +43,7 @@ class Credentials:
              Boolean: True or False
         """
         for credential in cls.credentials_list:
-            if credential.account_name == account_name:
+            if credential.application_name == application_name:
                 return True
         return False
     
@@ -54,8 +55,8 @@ class Credentials:
         return cls.credentials_list
     
     @classmethod
-    def copy_credentials(cls, account_name):
-        credential_found = Credentials.find_account_by_name(account_name)
+    def copy_credentials(cls, application_name):
+        credential_found = Credentials.find_account_by_name(application_name)
         to_copy = "Account Name: "+credential_found.account_name + " | Account Password: "+credential_found.account_password
         pyperclip.copy(to_copy)
     

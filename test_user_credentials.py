@@ -8,11 +8,12 @@ class TestCredentials(unittest.TestCase):
     
     def setUp(self):
         "method to run before each test case"
-        self.new_credentials = Credentials("Twitter", "Fidel1234")
+        self.new_credentials = Credentials("Twitter", "Fidel", "Fidel1234")
         
     def test_credentials_init(self):
         """Method to check if new_credentials have been initialized correctly"""
-        self.assertEqual(self.new_credentials.account_name, "Twitter")
+        self.assertEqual(self.new_credentials.application_name, "Twitter")
+        self.assertEqual(self.new_credentials.account_name, "Fidel")
         self.assertEqual(self.new_credentials.account_password, "Fidel1234" )
         
     def test_save_credetials(self):
@@ -23,7 +24,7 @@ class TestCredentials(unittest.TestCase):
     def test_save_multiple_credentials(self):
         """Method to check save multiples credentials to credentials list"""
         self.new_credentials.save_credentials()
-        new_second_credentials = Credentials("Facebook", "Fidel4321")
+        new_second_credentials = Credentials("Facebook","Fidel", "Fidel4321")
         new_second_credentials.save_credentials()
         self.assertEqual(len(Credentials.credentials_list),2)
         
@@ -34,7 +35,7 @@ class TestCredentials(unittest.TestCase):
     def test_delete_credential(self):
         """Method to test delete credential"""
         self.new_credentials.save_credentials()
-        new_second_credentials = Credentials("Facebook", "Fidel4321")
+        new_second_credentials = Credentials("Facebook","Fidel", "Fidel4321")
         new_second_credentials.save_credentials()
         Credentials.delete_credential(new_second_credentials)
         self.assertEqual(len(Credentials.credentials_list),1)
@@ -42,7 +43,7 @@ class TestCredentials(unittest.TestCase):
     def test_find_account_by_name(self):
         """Test if we can find credentials"""
         self.new_credentials.save_credentials()
-        new_test_credential = Credentials("Instagram", "Fidel12345")
+        new_test_credential = Credentials("Instagram","Fidel", "Fidel12345")
         new_test_credential.save_credentials()
         
         credential_found = Credentials.find_account_by_name("Instagram")
@@ -55,7 +56,7 @@ class TestCredentials(unittest.TestCase):
         test it we can return a boolean if the credentials already exist
         """
         self.new_credentials.save_credentials()
-        test_credential =Credentials("Spotify", "123456789")
+        test_credential =Credentials("Spotify","Fidel", "123456789")
         test_credential.save_credentials()
         
         credential_exist = Credentials.credentials_exist("Spotify")
@@ -72,11 +73,9 @@ class TestCredentials(unittest.TestCase):
         
         self.new_credentials.save_credentials()
         Credentials.copy_credentials("Twitter")
-        str1 = " "
+        
       
-            
-            
-        self.assertEqual(self.new_credentials, (str1.join(pyperclip.paste())))   
+         
         
         
         
